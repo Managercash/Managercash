@@ -26,6 +26,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	// Expense Categories Table
 	private static final String TABLE_CATEGORIES_EXPENSE = "categoriesExpense";
 	private static final String KEY_INCREMENT = "increment";
+	private static final String KEY_TEMP_AMOUNT = "tempAmount";
 
 	// Expense table
 	private static final String TABLE_EXPENSE = "expense";
@@ -70,7 +71,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 	private static final String CREATE_TABLE_CATEGORIES_EXPENSE = "CREATE TABLE " + TABLE_CATEGORIES_EXPENSE + "("
 			+ KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," + KEY_NAME + " TEXT," + KEY_IMAGE_SRC + " TEXT,"
-			+ KEY_INCREMENT + " INTEGER " + ")";
+			+ KEY_INCREMENT + " INTEGER, " +  KEY_TEMP_AMOUNT + " INTEGER " + ")";
+	
 
 	private static final String CREATE_TABLE_EXPENSE = "CREATE TABLE " + TABLE_EXPENSE + "(" + KEY_ID
 			+ " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " + KEY_WALLET_ID + " INTEGER, " + KEY_NAME + " TEXT, "
@@ -138,8 +140,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 	// -------------------------------------------------------------------------------------------------------------------//
 
-	// ///////////////////////////////////
-	// //////// ALL DEM METHODS //////////
+	/////////////////////////////////////
+	////////// ALL DEM METHODS //////////
 
 	// Create Income category
 	public void createIncomeCategory(CategoriesIncome ci) {
@@ -259,11 +261,24 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		values.put(KEY_NAME, ce.get_name());
 		values.put(KEY_IMAGE_SRC, ce.get_img_src());
 		values.put(KEY_INCREMENT, ce.get_increment());
+		values.put(KEY_TEMP_AMOUNT, 0);
 
 		db.insert(TABLE_CATEGORIES_EXPENSE, null, values);
 		Log.w("Database", "CREATED " + ce.get_name() + " EXPENSE CATEGORY");
 
 	}
+	
+	// Update temp_value in Expense category by ID
+	
+	public void updateTempValue(CategoriesExpense ce, int amount){
+		SQLiteDatabase db = this.getWritableDatabase();
+		ContentValues values=new ContentValues();
+		values.put(KEY_TEMP_AMOUNT, amount);
+
+		db.update(TABLE_CATEGORIES_EXPENSE, values, KEY_ID + " = " + ce.get_id(), null);
+
+	}
+	
 
 	// Get Expense Category by ID
 

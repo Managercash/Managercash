@@ -6,6 +6,8 @@ public class CategoriesExpense {
 	private String _name;
 	private String _img_src;
 	private int _increment;
+	private int _temp_amount;
+	
 	
 	public CategoriesExpense (int id, String name, String imgSrc, int increment){
 		this._id = id;
@@ -57,6 +59,18 @@ public class CategoriesExpense {
 
 	public void set_increment(int _increment) {
 		this._increment = _increment;
+	}
+	
+	public void add_to_temp_amount(int temp){
+		this._temp_amount = this._temp_amount + temp;
+	}
+	
+	public int get_temp_amount(){
+		return _temp_amount;
+	}
+	
+	public void set_temp_amount(int amount){
+		this._temp_amount = amount;
 	}
 	
 }

@@ -2,9 +2,6 @@
 <resources>
 
     <string name="app_name">Managercash</string>
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
     <string name="action_settings">Settings</string>
     <string name="add_expense">This is the expense page!</string>
     <string name="please_type">Please type here!</string>
@@ -30,6 +27,8 @@
     <string name="no">No</string>
     <string name="newnew">New</string>
     <string name="icon">icon</string>
+    <string name = "drawer_open">Open</string>
+    <string name = "drawer_closed">Closed</string>
   
 
 </resources>

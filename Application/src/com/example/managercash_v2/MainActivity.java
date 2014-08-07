@@ -1,8 +1,6 @@
 package com.example.managercash_v2;
 
-import com.example.managercash_v2.drawer.NavDrawerActivityConfiguration;
-
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
@@ -10,19 +8,34 @@ import android.support.v7.app.ActionBar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
+import com.example.managercash_v2.database.DatabaseHandler;
+import com.example.managercash_v2.database.DatabaseInitialiser;
+import com.example.managercash_v2.drawer.NavDrawerActivityConfiguration;
 
 public class MainActivity extends BaseActivity implements ActionBar.TabListener {
 
-
-	SectionsPagerAdapter mSectionsPagerAdapter;
-	ViewPager mViewPager;
+	private SectionsPagerAdapter mSectionsPagerAdapter;
+	private ViewPager mViewPager;
+	private int currentWalletId;
+	private DatabaseHandler dh;
+	private static final String PREFS_NAME = "ManagercashPreferencesFile";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		Log.w("managercash", "MainActivity Oncreate has been called");
 		super.onCreate(savedInstanceState);
+		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+		boolean firstRun = settings.getBoolean("firstRun", true);
+		dh = new DatabaseHandler(getApplicationContext());
+
+		// Initializes database if this is the apps first run.
+		if (firstRun) {
+			DatabaseInitialiser di = new DatabaseInitialiser(dh);
+			Log.w("Database", "Database has been initialised with data");
+			SharedPreferences.Editor editor = settings.edit();
+			editor.putBoolean("firstRun", false);
+			editor.commit();
+		}
 
 		// Set up the action bar.
 		final ActionBar actionBar = getSupportActionBar();
@@ -86,14 +99,25 @@ public class MainActivity extends BaseActivity implements ActionBar.TabListener 
 	}
 
 	@Override
-    protected NavDrawerActivityConfiguration getNavDrawerConfiguration() {
+	protected NavDrawerActivityConfiguration getNavDrawerConfiguration() {
 		return super.getNavDrawerConfiguration();
-    }
-    
-    @Override
-    protected void onNavItemSelected(int id) {
-    	super.onNavItemSelected(id);
-    }
+	}
 
+	@Override
+	protected void onNavItemSelected(int id) {
+		super.onNavItemSelected(id);
+	}
+
+	// /////////////////////////////
+	// /// Getters & Setters //////
+	// ///////////////////////////
+
+	public void setCurrentWalletId(int id) {
+		currentWalletId = id;
+	}
+
+	public int getCurrentWalletId() {
+		return currentWalletId;
+	}
 
 }

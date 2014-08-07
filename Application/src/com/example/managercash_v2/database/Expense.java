@@ -10,6 +10,7 @@ public class Expense {
     private String _date;
     private long _amount;
     
+    
     // constructor
     public Expense(int id, int _wallet_id, int _category_id, String _date, long _amount, String _name){
         this._id = id;
@@ -87,5 +88,6 @@ public class Expense {
 	public void set_amount(long _amount) {
 		this._amount = _amount;
 	}
+	
 
 }
