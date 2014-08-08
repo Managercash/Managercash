@@ -1,5 +1,8 @@
 package com.example.managercash_v2.fragments;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -19,16 +22,17 @@ import android.widget.GridView;
 import android.widget.Toast;
 
 import com.example.managercash_v2.R;
+import com.example.managercash_v2.database.CategoriesExpense;
+import com.example.managercash_v2.database.DatabaseHandler;
 
 public class AddExpense extends Fragment implements OnClickListener {
 
 	private GridView gridView;
 	private GridView tallyView;
-	private TextAdapter tA;
-	private ImageAdapter iA;
+	private AddExpenseTextAdapter tA;
+	private AddExpenseImageAdapter iA;
 	public static Context context;
-	private SharedPreferences expenseStuff;
-	private int[] tempArray;
+	private SharedPreferences addExpensePreferences;
 
 	private static final String PREFS_NAME = "ManagercashPreferencesFile";
 
@@ -42,16 +46,18 @@ public class AddExpense extends Fragment implements OnClickListener {
 		}
 
 		// Expense list initialization
-		expenseStuff = context.getSharedPreferences(PREFS_NAME, 0);
+		addExpensePreferences = context.getSharedPreferences(PREFS_NAME, 0);
 
-		// Setting the appropriate views based on orientation.
+		// Setting the views
 		View addExpenseView = inflater.inflate(R.layout.add_expense, container, false);
 
+		//Overlaying text grid
 		tallyView = (GridView) addExpenseView.findViewById(R.id.grid_overview);
-		tallyView.setAdapter(tA = new TextAdapter(addExpenseView.getContext()));
+		tallyView.setAdapter(tA = new AddExpenseTextAdapter(addExpenseView.getContext()));
 		
+		// Images Grid
 		gridView = (GridView) addExpenseView.findViewById(R.id.gridview);
-		gridView.setAdapter(iA = new ImageAdapter(addExpenseView.getContext()));
+		gridView.setAdapter(iA = new AddExpenseImageAdapter(addExpenseView.getContext()));
 
 
 		//Click listener - increments grid value 
@@ -160,8 +166,10 @@ public class AddExpense extends Fragment implements OnClickListener {
 	// Saves the state of the grid to sharedPreferences in a string format.
 	@Override
 	public void onPause() {
+		Log.w("Add Expense", "OnPause has been called");
 
 		tA.saveTemps();
+		tA.updateTempValue();
 		super.onPause();
 	}
 	
@@ -169,10 +177,11 @@ public class AddExpense extends Fragment implements OnClickListener {
 	// Restores the state of the grid.
 	@Override
 	public void onResume() {
+		Log.w("Add Expense", "On resume has been called");
 
 		super.onResume();
 
-		tA.getCategoriesExpenseList();
+		tA.updateTempValue();
 		tA.notifyDataSetChanged();
 	}
 

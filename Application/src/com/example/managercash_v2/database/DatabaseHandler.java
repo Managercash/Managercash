@@ -268,16 +268,29 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 	}
 	
-	// Update temp_value in Expense category by ID
 	
-	public void updateTempValue(CategoriesExpense ce, int amount){
+	// Update temp_value in Expense category by ID
+	public void updateTempValue(CategoriesExpense ce){
 		SQLiteDatabase db = this.getWritableDatabase();
-		ContentValues values=new ContentValues();
-		values.put(KEY_TEMP_AMOUNT, amount);
 
-		db.update(TABLE_CATEGORIES_EXPENSE, values, KEY_ID + " = " + ce.get_id(), null);
-
+		try{
+			db.beginTransaction();
+			
+			ContentValues values=new ContentValues();
+			values.put(KEY_TEMP_AMOUNT, ce.get_temp_amount());
+			
+			String[] args = new String[]{Integer.toString(ce.get_id())};
+			db.update(TABLE_CATEGORIES_EXPENSE, values, KEY_ID + "=?", args);
+			
+			db.setTransactionSuccessful();
+			
+		}finally{
+			db.endTransaction();
+		}
+			
 	}
+
+		
 	
 
 	// Get Expense Category by ID
@@ -286,7 +299,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		SQLiteDatabase db = this.getReadableDatabase();
 		String selectQuery = "SELECT * FROM " + TABLE_CATEGORIES_EXPENSE + " WHERE " + KEY_ID + " = " + Id;
 
-		Log.w("Database", "Select all from Categories expense where key id = " + Id);
+		Log.d("Database", "Select all from Categories expense where key id = " + Id);
 
 		Cursor c = null;
 		CategoriesExpense cE = null;
@@ -373,6 +386,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 					cE.set_name(c.getString(c.getColumnIndex(KEY_NAME)));
 					cE.set_img_src(c.getString(c.getColumnIndex(KEY_IMAGE_SRC)));
 					cE.set_increment(c.getInt(c.getColumnIndex(KEY_INCREMENT)));
+					cE.set_temp_amount(c.getInt(c.getColumnIndex(KEY_TEMP_AMOUNT)));
 
 					LCE.add(cE);
 				} while (c.moveToNext());
