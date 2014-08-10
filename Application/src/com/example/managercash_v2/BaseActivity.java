@@ -1,11 +1,10 @@
 package com.example.managercash_v2;
 
-import com.example.managercash_v2.drawer.*;
-
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -16,12 +15,21 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
+
+import com.example.managercash_v2.drawer.NavDrawerActivityConfiguration;
+import com.example.managercash_v2.drawer.NavDrawerAdapter;
+import com.example.managercash_v2.drawer.NavDrawerItem;
+import com.example.managercash_v2.drawer.NavMenuItem;
+import com.example.managercash_v2.drawer.NavMenuSection;
+import com.example.managercash_v2.fragments.Account;
+import com.example.managercash_v2.fragments.Categories;
+import com.example.managercash_v2.fragments.Overview;
+import com.example.managercash_v2.fragments.Settings;
 
 public abstract class BaseActivity extends ActionBarActivity {
 
 	private DrawerLayout mDrawerLayout;
-	private ActionBarDrawerToggle mDrawerToggle;
+	private ActionBarDrawerToggle mDrawerToggle;  
 
 	private ListView mDrawerList;
 
@@ -92,27 +100,31 @@ public abstract class BaseActivity extends ActionBarActivity {
 		return navDrawerActivityConfiguration;
 	}
 
+	// NavDrawer click listener
 	protected void onNavItemSelected(int id) {
-		Intent intent;
+		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+		Fragment fragment  = null;		
 		switch ((int) id) {
 		case 101:
-			Toast.makeText(this.getApplicationContext(), "First wallet selected", Toast.LENGTH_SHORT).show();
 			break;
 		case 102:
-			Toast.makeText(this.getApplicationContext(), "Second wallet selected", Toast.LENGTH_SHORT).show();
 			break;
 		case 201:
-			Toast.makeText(this.getApplicationContext(), "First option selected", Toast.LENGTH_SHORT).show();
+            fragment = new Account();
+            ft.replace(R.id.container, fragment);
+            ft.commit();
 			break;
 		case 202:
-			Toast.makeText(this.getApplicationContext(), "Second option selected", Toast.LENGTH_SHORT).show();
+            fragment = new Categories();
+            ft.replace(R.id.container, fragment);
+            ft.commit();
 			break;
 		case 203:
-			Toast.makeText(this.getApplicationContext(), "Third option selected", Toast.LENGTH_SHORT).show();
-
+            fragment = new Settings();
+            ft.replace(R.id.container, fragment);
+            ft.commit();
+            
 		}
-		
-
 	}
 
 	protected void initDrawerShadow() {
@@ -158,7 +170,6 @@ public abstract class BaseActivity extends ActionBarActivity {
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 
-		Log.w("managercash", "onKeyDown has been called from base activity.");
 		if (keyCode == KeyEvent.KEYCODE_MENU) {
 			if (this.mDrawerLayout.isDrawerOpen(this.mDrawerList)) {
 				Log.w("managercash", "drawer is open.");

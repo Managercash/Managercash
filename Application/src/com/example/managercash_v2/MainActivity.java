@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 
 import com.example.managercash_v2.database.DatabaseHandler;
 import com.example.managercash_v2.database.DatabaseInitialiser;
@@ -17,9 +18,11 @@ public class MainActivity extends BaseActivity implements ActionBar.TabListener 
 
 	private SectionsPagerAdapter mSectionsPagerAdapter;
 	private ViewPager mViewPager;
+	private ActionBar actionBar;
 	private int currentWalletId;
 	private DatabaseHandler dh;
 	private static final String PREFS_NAME = "ManagercashPreferencesFile";
+	private FrameLayout fl;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +30,7 @@ public class MainActivity extends BaseActivity implements ActionBar.TabListener 
 		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
 		boolean firstRun = settings.getBoolean("firstRun", true);
 		dh = new DatabaseHandler(getApplicationContext());
+		fl = (FrameLayout) findViewById(R.id.container);
 
 		// Initializes database if this is the apps first run.
 		if (firstRun) {
@@ -38,21 +42,22 @@ public class MainActivity extends BaseActivity implements ActionBar.TabListener 
 		}
 
 		// Set up the action bar.
-		final ActionBar actionBar = getSupportActionBar();
+		actionBar = getSupportActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
 		// Set up the pagerAdapter for swiping tabs
-		mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-		mViewPager = (ViewPager) findViewById(R.id.pager);
-		mViewPager.setAdapter(mSectionsPagerAdapter);
-
+		initialiseViewPager();
+		
 		mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
 			@Override
 			public void onPageSelected(int position) {
-				actionBar.setSelectedNavigationItem(position);
+				if (actionBar.getNavigationMode() == ActionBar.NAVIGATION_MODE_TABS) {
+					actionBar.setSelectedNavigationItem(position);
+
+				}
 			}
 		});
-
+		
 		// For each of the sections in the app, add a tab to the action bar.
 		for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
 			// Create a tab with text corresponding to the page title defined by
@@ -61,6 +66,14 @@ public class MainActivity extends BaseActivity implements ActionBar.TabListener 
 			// this tab is selected.
 			actionBar.addTab(actionBar.newTab().setText(mSectionsPagerAdapter.getPageTitle(i)).setTabListener(this));
 		}
+
+	}
+
+	public void initialiseViewPager() {
+		mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+		mViewPager = (ViewPager) findViewById(R.id.pager);
+		mViewPager.setAdapter(mSectionsPagerAdapter);
+		
 	}
 
 	@Override
@@ -105,7 +118,28 @@ public class MainActivity extends BaseActivity implements ActionBar.TabListener 
 
 	@Override
 	protected void onNavItemSelected(int id) {
+		if(id > 200){//If id = Categories, Settings or accounts
+			if (mViewPager!=null){
+				mViewPager.removeAllViews();
+				actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+				mViewPager = null;
+				mSectionsPagerAdapter = null;
+			}			
+		}
+		else{
+			fl.removeAllViews();
+			if(mViewPager != null){	
+				actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
+			}
+			else{
+				initialiseViewPager();
+				actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+				
+			}
+		}
 		super.onNavItemSelected(id);
+		
 	}
 
 	// /////////////////////////////

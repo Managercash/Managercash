@@ -38,17 +38,6 @@ public final class AddExpenseTextAdapter extends BaseAdapter {
 		dh = new DatabaseHandler(context);
 		categoriesExpenseList = dh.getAllExpenseCategories();
 
-		for (CategoriesExpense cEx : categoriesExpenseList) {
-			int id = cEx.get_id();
-			String name = cEx.get_name();
-			String imgSrc = cEx.get_img_src();
-			int increment = cEx.get_increment();
-			int tempValue = cEx.get_temp_amount();
-
-			Log.w("ADDEXPENSE TEXT ADAPTER - CONSTRUCTOR", "Expense category- ID: " + id + " Name: " + name
-					+ " ImageSrc: " + imgSrc + " Increment: " + increment + " TempValue: " + tempValue);
-		}
-
 	}
 
 	public List<CategoriesExpense> getCategoriesExpenseList() {
