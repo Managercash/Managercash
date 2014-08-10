@@ -32,6 +32,12 @@ public class NavDrawerAdapter extends ArrayAdapter<NavDrawerItem> {
         return view ;
     }
     
+    public View getRadioView(View convertView, ViewGroup parentView, NavDrawerItem navDrawerItem){
+    	
+    	
+    	return convertView;
+    }
+    
     public View getItemView( View convertView, ViewGroup parentView, NavDrawerItem navDrawerItem ) {
         
         NavMenuItem menuItem = (NavMenuItem) navDrawerItem ;

@@ -73,12 +73,12 @@ public abstract class BaseActivity extends ActionBarActivity {
 		Log.w("managercash", "NavDrawerActivityConfiguration is called");
 
 		NavDrawerItem[] menu = new NavDrawerItem[] { NavMenuSection.create(100, "Wallets"),
-				NavMenuItem.create(101, "Steve-Savings", "phone", false, this),
-				NavMenuItem.create(102, "Steve Junior", "phone", false, this),
+				NavMenuItem.create(101, "Steve-Savings", "wallet", false, this),
+				NavMenuItem.create(102, "Steve Junior", "wallet", false, this),
 				NavMenuSection.create(200, "General"),
-				NavMenuItem.create(201, "Account", "user", true, this),
-				NavMenuItem.create(202, "Categories", "boxes", true, this),
-				NavMenuItem.create(203, "Settings", "gear", true, this) };
+				NavMenuItem.create(201, "Account", "accounts", true, this),
+				NavMenuItem.create(202, "Categories", "categories", true, this),
+				NavMenuItem.create(203, "Settings", "settings", true, this) };
 
 		NavDrawerActivityConfiguration navDrawerActivityConfiguration = new NavDrawerActivityConfiguration();
 		navDrawerActivityConfiguration.setMainLayout(R.layout.activity_main);

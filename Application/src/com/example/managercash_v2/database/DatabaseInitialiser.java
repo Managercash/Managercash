@@ -20,13 +20,13 @@ public class DatabaseInitialiser {
 		db.createWallet(w);
 		
 		//Create categories
-		CategoriesExpense cE = new CategoriesExpense("Gas", "drawable/gas", 15); 
+		CategoriesExpense cE = new CategoriesExpense("Gas", "drawable/gasutility", 15); 
 		db.createExpenseCategory(cE);
 		
-		cE = new CategoriesExpense("Electric", "drawable/electric", 15);
+		cE = new CategoriesExpense("Electric", "drawable/electricutility", 15);
 		db.createExpenseCategory(cE);
 		
-		cE = new CategoriesExpense("Water", "drawable/water", 15);
+		cE = new CategoriesExpense("Water", "drawable/waterutility", 15);
 		db.createExpenseCategory(cE);
 		
 		cE = new CategoriesExpense("Education", "drawable/education", 10); 
@@ -38,16 +38,16 @@ public class DatabaseInitialiser {
 		cE = new CategoriesExpense("Leisure", "drawable/leisure", 5); 
 		db.createExpenseCategory(cE);
 		
-		cE = new CategoriesExpense("Food", "drawable/food", 5);
+		cE = new CategoriesExpense("Food", "drawable/foodout", 5);
 		db.createExpenseCategory(cE);
 		
-		cE = new CategoriesExpense("Drink", "drawable/drink", 3);
+		cE = new CategoriesExpense("Drink", "drawable/drinksout", 3);
 		db.createExpenseCategory(cE);
 		
-		cE = new CategoriesExpense("Food Shopping", "drawable/food_shopping", 10); 
+		cE = new CategoriesExpense("Food Shopping", "drawable/foodshopping", 10); 
 		db.createExpenseCategory(cE);
 		
-		cE = new CategoriesExpense("High Street Shopping", "drawable/high_street_shopping", 5);
+		cE = new CategoriesExpense("High Street Shopping", "drawable/highstreetshopping", 5);
 		db.createExpenseCategory(cE);
 		
 		cE = new CategoriesExpense("Travel", "drawable/travel", 2);
@@ -59,13 +59,13 @@ public class DatabaseInitialiser {
 		cE = new CategoriesExpense("Gifts", "drawable/gifts", 5); 
 		db.createExpenseCategory(cE);
 		
-		cE = new CategoriesExpense("Medical", "drawable/medical", 5); 
+		cE = new CategoriesExpense("Medical", "drawable/medicine", 5); 
 		db.createExpenseCategory(cE);
 		
 		cE = new CategoriesExpense("Petrol", "drawable/petrol", 10); 
 		db.createExpenseCategory(cE);
 		
-		cE = new CategoriesExpense("Internet Shopping", "drawable/internet_shopping", 10);
+		cE = new CategoriesExpense("Internet Shopping", "drawable/onlineshopping", 10);
 		db.createExpenseCategory(cE);
 		
 		cE = new CategoriesExpense("Gambling", "drawable/gambling", 10);
@@ -74,7 +74,7 @@ public class DatabaseInitialiser {
 		cE = new CategoriesExpense("Investment", "drawable/investment", 10);
 		db.createExpenseCategory(cE);
 		
-		cE = new CategoriesExpense("Family", "drawable/family", 10); 
+		cE = new CategoriesExpense("Family", "drawable/lovedones", 10); 
 		db.createExpenseCategory(cE);
 		
 		cE = new CategoriesExpense("Gaming", "drawable/gaming", 5); 
