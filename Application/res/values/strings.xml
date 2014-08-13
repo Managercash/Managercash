@@ -29,6 +29,16 @@
     <string name="icon">icon</string>
     <string name = "drawer_open">Open</string>
     <string name = "drawer_closed">Closed</string>
-  
+    <string name = "default_spinner_value">Please Select an Option</string>
+    <string-array name="planets_array">
+        <item>Mercury</item>
+        <item>Venus</item>
+        <item>Earth</item>
+        <item>Mars</item>
+        <item>Jupiter</item>
+        <item>Saturn</item>
+        <item>Uranus</item>
+        <item>Neptune</item>
+    </string-array>
 
 </resources>

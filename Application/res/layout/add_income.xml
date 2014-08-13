@@ -1,15 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/portrait_gridview_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_margin="8dp"
+        android:orientation="vertical" 
+        android:background="@drawable/grey_bg" >
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:background="@drawable/text_box_field" >
+	        <Spinner
+	            android:id="@+id/spinner"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_margin="3dip"
+	            android:radius="10dip"
+	            android:prompt="@string/accept" />
+        </LinearLayout>
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:background="@drawable/text_box_field" >
+	        <EditText
+	            android:id="@+id/edit_message1"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_margin="3dip"
+	            android:ellipsize="end"
+	            android:maxLines="1"
+	            android:hint="@string/accept" />
+        </LinearLayout>
+        
+        
+    </LinearLayout>
+
+    <LinearLayout
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/add_income"
-        android:gravity = "center"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-  
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/accept_button"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/accept"
+            android:textColor="@color/teal"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/cancel_button"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/cancel"
+            android:textColor="@color/teal"
+            android:textStyle="bold" />
+
+    </LinearLayout>
 
 </LinearLayout>
