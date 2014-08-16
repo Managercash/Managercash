@@ -17,11 +17,11 @@
             android:id="@+id/gridview"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_margin="15dp"
             android:gravity="center"
-            android:horizontalSpacing="10dp"
+            android:horizontalSpacing="8dp"
             android:numColumns="4"
-            android:verticalSpacing="10dp" >
+            android:verticalSpacing="8dp" >
             <!-- android:stretchMode = "none" -->
             
         </GridView>
@@ -30,11 +30,11 @@
             android:id="@+id/grid_overview"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_margin="15dp"
             android:gravity="center"
-            android:horizontalSpacing="10dp"
+            android:horizontalSpacing="8dp"
             android:numColumns="4"
-            android:verticalSpacing="10dp" 
+            android:verticalSpacing="8dp" 
             >
         </GridView>
     </FrameLayout>

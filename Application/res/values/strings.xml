@@ -22,23 +22,17 @@
     <string name="overview">This is the Overview page</string>
     <string name="cancel">Cancel</string>
     <string name="removeExpense">Delete Expenses</string>
-    <string name="reallyRemoveExpenses">Are you sure you wish to remove all expenses?</string>
+    <string name="reallyRemoveExpenses">Are you sure you wish to remove all Expenses?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="newnew">New</string>
     <string name="icon">icon</string>
     <string name = "drawer_open">Open</string>
     <string name = "drawer_closed">Closed</string>
-    <string name = "default_spinner_value">Please Select an Option</string>
-    <string-array name="planets_array">
-        <item>Mercury</item>
-        <item>Venus</item>
-        <item>Earth</item>
-        <item>Mars</item>
-        <item>Jupiter</item>
-        <item>Saturn</item>
-        <item>Uranus</item>
-        <item>Neptune</item>
-    </string-array>
+    <string name = "default_spinner_value">Please select a category</string>
+    <string name = "removeIncome">Cancel + Income</string>
+    <string name = "reallyRemoveIncome">Are you sure you wish to remove this Income?</string>
+    <string name = "addIncomeImageviewDescription">Image of current spinner selection</string>
+
 
 </resources>

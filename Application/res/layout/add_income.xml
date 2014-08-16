@@ -5,72 +5,88 @@
     android:orientation="vertical" >
 
     <LinearLayout
-        android:id="@+id/portrait_gridview_layout"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_margin="8dp"
-        android:orientation="vertical" 
-        android:background="@drawable/grey_bg" >
-        
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:background="@drawable/text_box_field" >
-	        <Spinner
-	            android:id="@+id/spinner"
-	            android:layout_width="match_parent"
-	            android:layout_height="wrap_content"
-	            android:layout_margin="3dip"
-	            android:radius="10dip"
-	            android:prompt="@string/accept" />
-        </LinearLayout>
-        
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:background="@drawable/text_box_field" >
-	        <EditText
-	            android:id="@+id/edit_message1"
-	            android:layout_width="match_parent"
-	            android:layout_height="wrap_content"
-	            android:layout_margin="3dip"
-	            android:ellipsize="end"
-	            android:maxLines="1"
-	            android:hint="@string/accept" />
-        </LinearLayout>
-        
-        
-    </LinearLayout>
-
-    <LinearLayout
-        style="?android:attr/buttonBarStyle"
+        android:id="@+id/portrait_addincome_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:layout_margin="8dp"
+        android:background="@drawable/grey_bg"
+        android:orientation="vertical" >
 
-        <Button
-            android:id="@+id/accept_button"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/accept"
-            android:textColor="@color/teal"
-            android:textStyle="bold" />
+            android:layout_margin="8dp"
+            android:orientation="horizontal" >
 
-        <Button
-            android:id="@+id/cancel_button"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="0dp"
+            <!-- android:background="@drawable/text_box_field" -->
+
+            <ImageView
+                android:id="@+id/category_image_addincome"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/text_box_field"
+                android:contentDescription="@string/addIncomeImageviewDescription"
+                android:padding="4dp"
+                android:src="@drawable/categories" >
+
+            </ImageView>
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="3dip"
+                android:layout_weight="3"
+                android:hint="@string/accept"
+                android:radius="10dip" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/cancel"
-            android:textColor="@color/teal"
-            android:textStyle="bold" />
+            android:layout_margin="8dp"
+            android:background="@drawable/text_box_field" >
 
-    </LinearLayout>
+            <EditText
+                android:id="@+id/edit_message1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dip"
+                android:ellipsize="end"
+                android:hint="@string/accept"
+                android:maxLines="1" />
+        </LinearLayout>
+		
+	</LinearLayout>
 
-</LinearLayout>
+        <LinearLayout
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/accept_button"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/accept"
+                android:textColor="@color/teal"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/cancel_button"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/cancel"
+                android:textColor="@color/teal"
+                android:textStyle="bold" />
+				
+				</LinearLayout>
+		</LinearLayout>
+				
+     

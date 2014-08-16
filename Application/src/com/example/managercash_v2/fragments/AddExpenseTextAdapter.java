@@ -133,12 +133,12 @@ public final class AddExpenseTextAdapter extends BaseAdapter {
 		if (convertView == null) {
 
 			Resources r = Resources.getSystem();
-			float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 55, r.getDisplayMetrics());
+			float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 60, r.getDisplayMetrics());
 			textView = new TextView(context);
 			// Puts text into a grid view that overlays the imageview.
 			// (ImageAdapter.java)
 			textView.setLayoutParams(new GridView.LayoutParams((int) px, (int) px));
-			textView.setPadding(2, 0, 0, 0);
+			textView.setPadding(14, 4, 0, 0);
 			textView.setTextColor(Color.WHITE);
 		} else {
 			textView = (TextView) convertView;

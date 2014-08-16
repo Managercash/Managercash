@@ -56,7 +56,7 @@ public class AddExpenseImageAdapter extends BaseAdapter {
         	
         	//Calculates screen size and scales images accordingly
         	Resources r = Resources.getSystem();
-			float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 55, r.getDisplayMetrics());
+			float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 60, r.getDisplayMetrics());
 			
 			//Creates image view
             imageView = new ImageView(context);
@@ -64,17 +64,17 @@ public class AddExpenseImageAdapter extends BaseAdapter {
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             imageView.setPadding(8, 8, 8, 8);
             
-            //Sets background for individual icons depending on API level
-            if(Build.VERSION.SDK_INT < 16){
-            	
-            	imageView.setBackgroundColor(context.getResources().getColor(R.color.background_gray));
-            	imageView.setBackgroundResource(R.drawable.grey_bg);
-            }
-            else{
-            	imageView.setBackgroundResource(R.drawable.grey_bg);
-
-
-            }
+//            //Sets background for individual icons depending on API level
+//            if(Build.VERSION.SDK_INT < 16){
+//            	
+//            	imageView.setBackgroundColor(context.getResources().getColor(R.color.background_gray));
+//            	imageView.setBackgroundResource(R.drawable.grey_bg);
+//            }
+//            else{
+//            	imageView.setBackgroundResource(R.drawable.grey_bg);
+//
+//
+//            }
             
         } else {
             imageView = (ImageView) convertView;

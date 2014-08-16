@@ -19,7 +19,7 @@ public class DatabaseInitialiser {
 		w = new Wallet("Jess", 0 , 0);
 		db.createWallet(w);
 		
-		//Create categories
+		//Create expense categories
 		CategoriesExpense cE = new CategoriesExpense("Gas", "drawable/gasutility", 15); 
 		db.createExpenseCategory(cE);
 		
@@ -79,6 +79,31 @@ public class DatabaseInitialiser {
 		
 		cE = new CategoriesExpense("Gaming", "drawable/gaming", 5); 
 		db.createExpenseCategory(cE);
+		
+		//Create Income Categories
+		CategoriesIncome cI = new CategoriesIncome("Gift", "drawable/gifts"); 
+		db.createIncomeCategory(cI);
+		
+		cI = new CategoriesIncome("Award", "drawable/award"); 
+		db.createIncomeCategory(cI);
+		
+		cI = new CategoriesIncome("Interest", "drawable/interest"); 
+		db.createIncomeCategory(cI);
+		
+		cI = new CategoriesIncome("Stocks", "drawable/stocks"); 
+		db.createIncomeCategory(cI);
+		
+		cI = new CategoriesIncome("Sales", "drawable/selling"); 
+		db.createIncomeCategory(cI);
+		
+		cI = new CategoriesIncome("Insurance", "drawable/insurance"); 
+		db.createIncomeCategory(cI);
+		
+		cI = new CategoriesIncome("Salary", "drawable/salary"); 
+		db.createIncomeCategory(cI);
+		
+		cI = new CategoriesIncome("Investment", "drawable/investment"); 
+		db.createIncomeCategory(cI);
 	}
 	
 }
