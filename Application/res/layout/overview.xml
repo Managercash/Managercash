@@ -1,15 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
+        android:id="@+id/overviewText1"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/overview"
-        android:gravity = "center"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-  
+        android:layout_margin="8dp"
+        android:background="@drawable/grey_bg"
+        android:gravity="left"
+        android:padding="4dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/white" />
+
+    <LinearLayout
+        android:id="@+id/lineChart"
+        android:layout_width="wrap_content"
+        android:layout_height="0dip"
+        android:layout_margin="10dp"
+        android:layout_weight="1"
+        android:background="@drawable/grey_bg"
+        android:orientation="vertical"
+        android:padding="10dp" >
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/pieChart"
+        android:layout_width="wrap_content"
+        android:layout_height="0dip"
+        android:layout_margin="10dp"
+        android:layout_weight="1"
+        android:background="@drawable/grey_bg"
+        android:orientation="vertical"
+        android:padding="10dp" >
+    </LinearLayout>
 
 </LinearLayout>

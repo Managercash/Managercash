@@ -173,7 +173,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 			if (c != null) {
 				c.moveToFirst();
 			}
-
+			
 			CI.set_id(c.getInt(c.getColumnIndex(KEY_ID)));
 			CI.set_name(c.getString(c.getColumnIndex(KEY_NAME)));
 			CI.set_img_src(c.getString(c.getColumnIndex(KEY_IMAGE_SRC)));
@@ -465,7 +465,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	}
 
 	// Get Expense Between Dates
-	public List<Expense> getExpense(String startDate, String endDate) {
+	// Example of how to use:
+	// List <Expense> expenseList = dh.getExpenseBetweenDates("'2014-08-10 00:00:00'", "'2014-08-17 00:00:00'");
+	public List<Expense> getExpenseBetweenDates(String startDate, String endDate) {
 		List<Expense> lE = new ArrayList<Expense>();
 		String selectQuery = "SELECT * FROM " + TABLE_EXPENSE + " WHERE " + KEY_DATE + " BETWEEN " + startDate
 				+ " AND " + endDate;
@@ -678,7 +680,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	}
 
 	// Get income Between Dates
-	public List<Income> getIncome(String startDate, String endDate) {
+	public List<Income> getIncomeBetweenDates(String startDate, String endDate) {
 		List<Income> lI = new ArrayList<Income>();
 		String selectQuery = "SELECT * FROM " + TABLE_INCOME + " WHERE " + KEY_DATE + " BETWEEN " + startDate + " AND "
 				+ endDate;

@@ -48,10 +48,15 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 			return overviewdefault;
 		}
 	}
+	
+	@Override
+	public int getItemPosition(Object object) {
+		   return POSITION_NONE;
+		}
 
 	@Override
 	public int getCount() {
-		// Show 3 total pages.
+		// Show 5 total pages.
 		return 5;
 	}
 

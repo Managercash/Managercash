@@ -72,6 +72,7 @@ public class MainActivity extends BaseActivity implements ActionBar.TabListener 
 	public void initialiseViewPager() {
 		mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 		mViewPager = (ViewPager) findViewById(R.id.pager);
+		mViewPager.setOffscreenPageLimit(5);					//Implement this to never destroy a tab
 		mViewPager.setAdapter(mSectionsPagerAdapter);
 		
 	}
@@ -100,7 +101,8 @@ public class MainActivity extends BaseActivity implements ActionBar.TabListener 
 	public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
 		// When the given tab is selected, switch to the corresponding page in
 		// the ViewPager.
-		mViewPager.setCurrentItem(tab.getPosition());
+//		mSectionsPagerAdapter.notifyDataSetChanged(); //- Implement this to refresh tab everytime the view is switched.
+		mViewPager.setCurrentItem(tab.getPosition()); // However it kills performance :/ 
 	}
 
 	@Override

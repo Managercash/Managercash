@@ -29,8 +29,6 @@ public final class AddExpenseTextAdapter extends BaseAdapter {
 	private List<CategoriesExpense> categoriesExpenseList;
 	private Context context;
 	private DatabaseHandler dh;
-	private Calendar calendar;
-	private MainActivity mainActivity;
 
 	public AddExpenseTextAdapter(Context context) {
 
@@ -57,8 +55,8 @@ public final class AddExpenseTextAdapter extends BaseAdapter {
 	public void saveTally() {
 		if (checkExpenses()) {
 			// Gets todays date in string format
-			SimpleDateFormat df = new SimpleDateFormat("yyyy/mm/dd hh:mm:ss");
-			Date today = calendar.getInstance().getTime();
+			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Date today = Calendar.getInstance().getTime();
 			String date = df.format(today);
 
 			// Loop through categoriesEpenseList, creating expenses. Then resets

@@ -5,7 +5,6 @@ import java.util.List;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -41,33 +40,40 @@ public class AddIncome extends Fragment implements OnClickListener {
 	private DatabaseHandler dh;
 	private ArrayAdapter<String> adapter;
 	private ImageView imageView;
+	private List<CategoriesIncome> cIL;
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+	public void onCreate (Bundle savedInstanceState){
+		super.onCreate(savedInstanceState);
+		
 		if (getActivity() != null) {
 			context = getActivity();
 		}
 
+		dh = new DatabaseHandler(context);
+		cIL = dh.getAllIncomeCategories();
+		
+	}
+	
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+
 		View addIncomeView = inflater.inflate(R.layout.add_income, container, false);
 
-		dh = new DatabaseHandler(context);
 
-		// Image
-		
+		// Spinner Image
 		imageView = (ImageView) addIncomeView.findViewById(R.id.category_image_addincome);
 
 
 		// spinner
-
 		// Populates spinner with income category names from database
-		List<CategoriesIncome> lCI = dh.getAllIncomeCategories();
-		spinnerItems = new String[lCI.size() + 1]; // +1 for the hint.
-		for (int i = 0; i != lCI.size(); i++) {
-			spinnerItems[i] = lCI.get(i).get_name();
+		spinnerItems = new String[cIL.size() + 1]; // +1 for the hint.
+		for (int i = 0; i != cIL.size(); i++) {
+			spinnerItems[i] = cIL.get(i).get_name();
 		}
 
-		spinnerItems[lCI.size()] = getResources().getString(R.string.default_spinner_value);
+		spinnerItems[cIL.size()] = getResources().getString(R.string.default_spinner_value);
 
 		spinner = (Spinner) addIncomeView.findViewById(R.id.spinner);
 
@@ -101,15 +107,17 @@ public class AddIncome extends Fragment implements OnClickListener {
 		spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-				Log.w("Addincome", "On item selected has been called");
-				Log.w("addIncome.java", "itemSelectedCalls = " + itemSelectedCalls);
+
 				if (itemSelectedCalls > 2) {
 					spinnerSelectedItem = position;
 					spinner.setSelection(spinnerSelectedItem);
-					setImage();
+					if(spinnerSelectedItem < 8){
+						setImage();
+
+					}
 
 				} else {
-					spinner.setSelection(spinnerSelectedItem);
+					spinner.setSelection(adapter.getCount());
 				}
 
 				itemSelectedCalls++;
@@ -149,7 +157,8 @@ public class AddIncome extends Fragment implements OnClickListener {
 	}
 
 	private void setImage() {
-		String mDrawableName = "@" + dh.getCategoriesIncome(spinnerSelectedItem +1).get_img_src();
+		
+		String mDrawableName = "@" + cIL.get(spinnerSelectedItem).get_img_src();
 		int resID = getResources().getIdentifier(mDrawableName , null, context.getPackageName());
 		Drawable res = getResources().getDrawable(resID);
 		
@@ -158,7 +167,6 @@ public class AddIncome extends Fragment implements OnClickListener {
 
 	@Override
 	public void onPause() {
-		Log.w("Addincome", "OnPause = Spinner selected item = " + spinnerSelectedItem);
 		super.onPause();
 
 	}
@@ -166,11 +174,8 @@ public class AddIncome extends Fragment implements OnClickListener {
 	@Override
 	public void onResume() {
 		super.onResume();
-
-		spinner.setSelection(spinnerSelectedItem);
-
-		Log.w("Addincome", "Onresume = Spinner selected item = " + spinnerSelectedItem);
 		itemSelectedCalls = 0;
+		spinner.setSelection(spinnerSelectedItem);
 
 	}
 
