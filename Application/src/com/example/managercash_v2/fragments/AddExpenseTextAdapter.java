@@ -61,7 +61,7 @@ public final class AddExpenseTextAdapter extends BaseAdapter {
 
 			// Loop through categoriesEpenseList, creating expenses. Then resets
 			// the lists temporary amount to 0.
-			for (int i = 0; i < 20; i++) {
+			for (int i = 0; i < getCount(); i++) {
 				if (categoriesExpenseList.get(i).get_temp_amount() > 0) {
 					Expense expense = new Expense(1, i + 1, date, categoriesExpenseList.get(i).get_temp_amount()); // Using
 
@@ -93,7 +93,7 @@ public final class AddExpenseTextAdapter extends BaseAdapter {
 
 	public boolean checkExpenses() {
 		int total = 0;
-		for (int i = 0; i < 20; i++) {
+		for (int i = 0; i < getCount(); i++) {
 			total += categoriesExpenseList.get(i).get_temp_amount();
 		}
 		if (total > 0) {

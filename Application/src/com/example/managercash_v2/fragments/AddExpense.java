@@ -1,8 +1,5 @@
 package com.example.managercash_v2.fragments;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -10,20 +7,23 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ListView;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.managercash_v2.R;
-import com.example.managercash_v2.database.CategoriesExpense;
-import com.example.managercash_v2.database.DatabaseHandler;
 
 public class AddExpense extends Fragment implements OnClickListener {
 
@@ -33,6 +33,9 @@ public class AddExpense extends Fragment implements OnClickListener {
 	private AddExpenseImageAdapter iA;
 	public static Context context;
 	private SharedPreferences addExpensePreferences;
+	private AddNewExpense addNewExpense;
+	private PopupWindow popupWindow;
+	private PopupWindowListAdapter lA;
 
 	private static final String PREFS_NAME = "ManagercashPreferencesFile";
 
@@ -89,6 +92,7 @@ public class AddExpense extends Fragment implements OnClickListener {
 			}
 
 		});
+	
 
 		// Buttons
 
@@ -115,12 +119,9 @@ public class AddExpense extends Fragment implements OnClickListener {
 			if (!tA.checkExpenses()) {
 				Toast.makeText(context, "No expenses selected", Toast.LENGTH_SHORT).show();
 			} else {
-
-				tA.saveTally();
-				tA.resetTemps();
-				tA.notifyDataSetChanged();
-				Toast.makeText(context, "Expenses have been added", Toast.LENGTH_SHORT).show();
-
+				//Popup Window List Adapter
+				lA = new PopupWindowListAdapter(context, R.layout.add_expense_list_view_item, tA);
+				showPopup(v);
 			}
 
 			break;
@@ -153,9 +154,22 @@ public class AddExpense extends Fragment implements OnClickListener {
 			break;
 
 		case R.id.new_expense_button:
-//			((MainActivity) getActivity()).replaceFragment(addNewExpense = new AddNewExpense());
+			//getActivity().replaceFragment(addNewExpense = new AddNewExpense());
 			Toast.makeText(context, "new expense button has been pressed", Toast.LENGTH_LONG).show();
 			break;
+			
+		case R.id.popup_accept_button:
+			tA.saveTally();
+			tA.resetTemps();
+			tA.notifyDataSetChanged();
+			removePopup();
+			Toast.makeText(context, "Expenses have been added", Toast.LENGTH_SHORT).show();
+			break;
+			
+		case R.id.popup_cancel_button:
+			removePopup();
+			break;
+		
 
 		default:
 			Log.w("Add Expense", "ERROR SELECTING BUTTON _ onClick METHOD");
@@ -184,5 +198,53 @@ public class AddExpense extends Fragment implements OnClickListener {
 		tA.updateTempValue();
 		tA.notifyDataSetChanged();
 	}
+	
+	public void showPopup(View anchorView) {
+
+	    View popupView = getLayoutInflater(null).inflate(R.layout.popup_layout, null);
+	    
+	    popupWindow = new PopupWindow(popupView, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+
+	    // Example: If you have a TextView inside `popup_layout.xml`    
+	    TextView tv = (TextView) popupView.findViewById(R.id.popUpText1);
+
+	    tv.setText("Confirm the following expenses");
+	    
+	    
+	    ListView lv = (ListView) popupView.findViewById(R.id.popupList);
+	    lv.setAdapter(lA);
+
+	    
+	    final Button popupAcceptButton = (Button) popupView
+				.findViewById(R.id.popup_accept_button);
+		popupAcceptButton.setOnClickListener(this);
+
+		final Button popupCancelButton = (Button) popupView
+				.findViewById(R.id.popup_cancel_button);
+		popupCancelButton.setOnClickListener(this);
+
+
+
+	    // If the PopupWindow should be focusable
+	    popupWindow.setFocusable(true);
+
+	    // If you need the PopupWindow to dismiss when when touched outside 
+//	    popupWindow.setBackgroundDrawable(new ColorDrawable());
+
+	    int location[] = new int[2];
+
+	    // Get the View's(the one that was clicked in the Fragment) location
+	    anchorView.getLocationOnScreen(location);
+
+	    // Using location, the PopupWindow will be displayed right under anchorView
+	    popupWindow.showAtLocation(anchorView, Gravity.CENTER, 0, 0);
+
+	}
+	
+	public void removePopup(){
+		popupWindow.dismiss();
+		
+	}
+	
 
 }

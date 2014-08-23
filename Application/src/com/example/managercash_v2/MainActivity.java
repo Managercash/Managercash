@@ -72,7 +72,7 @@ public class MainActivity extends BaseActivity implements ActionBar.TabListener 
 	public void initialiseViewPager() {
 		mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 		mViewPager = (ViewPager) findViewById(R.id.pager);
-		mViewPager.setOffscreenPageLimit(5);					//Implement this to never destroy a tab
+		mViewPager.setOffscreenPageLimit(0);					//Implement this to never destroy a tab
 		mViewPager.setAdapter(mSectionsPagerAdapter);
 		
 	}
