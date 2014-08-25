@@ -2,47 +2,47 @@ package com.example.managercash_v2.drawer;
 
 public class NavMenuSection implements NavDrawerItem {
 
-    public static final int SECTION_TYPE = 0;
-    private int id;
-    private String label;
+	public static final int SECTION_TYPE = 0;
+	private int id;
+	private String label;
 
-    private NavMenuSection() {
-    }
-    
-    public static NavMenuSection create( int id, String label ) {
-        NavMenuSection section = new NavMenuSection();
-        section.setLabel(label);
-        return section;
-    }
-    
-    @Override
-    public int getType() {
-        return SECTION_TYPE;
-    }
+	private NavMenuSection() {
+	}
 
-    public String getLabel() {
-        return label;
-    }
+	public static NavMenuSection create(int id, String label) {
+		NavMenuSection section = new NavMenuSection();
+		section.setLabel(label);
+		return section;
+	}
 
-    public void setLabel(String label) {
-        this.label = label;
-    }
+	@Override
+	public int getType() {
+		return SECTION_TYPE;
+	}
 
-    @Override
-    public boolean isEnabled() {
-        return false;
-    }
+	public String getLabel() {
+		return label;
+	}
 
-    public int getId() {
-        return id;
-    }
+	public void setLabel(String label) {
+		this.label = label;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	@Override
+	public boolean isEnabled() {
+		return false;
+	}
 
-    @Override
-    public boolean updateActionBarTitle() {
-        return false;
-    }
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	@Override
+	public boolean updateActionBarTitle() {
+		return false;
+	}
 }

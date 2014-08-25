@@ -23,7 +23,6 @@ import com.example.managercash_v2.drawer.NavMenuItem;
 import com.example.managercash_v2.drawer.NavMenuSection;
 import com.example.managercash_v2.fragments.Account;
 import com.example.managercash_v2.fragments.Categories;
-import com.example.managercash_v2.fragments.Overview;
 import com.example.managercash_v2.fragments.Settings;
 
 public abstract class BaseActivity extends ActionBarActivity {
@@ -81,8 +80,8 @@ public abstract class BaseActivity extends ActionBarActivity {
 		Log.w("managercash", "NavDrawerActivityConfiguration is called");
 
 		NavDrawerItem[] menu = new NavDrawerItem[] { NavMenuSection.create(100, "Wallets"),
-				NavMenuItem.create(101, "Steve-Savings", "wallet", false, this),
-				NavMenuItem.create(102, "Steve Junior", "wallet", false, this),
+				NavMenuItem.create(101, "Steve-Savings", 20, "wallet", false, this),
+				NavMenuItem.create(102, "Steve Junior", 12, "wallet", false, this),
 				NavMenuSection.create(200, "General"),
 				NavMenuItem.create(201, "Account", "accounts", true, this),
 				NavMenuItem.create(202, "Categories", "categories", true, this),

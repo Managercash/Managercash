@@ -42,14 +42,22 @@ public class NavDrawerAdapter extends ArrayAdapter<NavDrawerItem> {
 		NavMenuItemHolder navMenuItemHolder = null;
 
 		if (convertView == null) {
+			
 			convertView = inflater.inflate(R.layout.navdrawer_item, parentView, false);
+			
 			TextView labelView = (TextView) convertView.findViewById(R.id.navmenuitem_label);
 			ImageView iconView = (ImageView) convertView.findViewById(R.id.navmenuitem_icon);
 
 			navMenuItemHolder = new NavMenuItemHolder();
+
 			navMenuItemHolder.labelView = labelView;
 			navMenuItemHolder.iconView = iconView;
-
+			
+			if (menuItem.usesCounter()) {
+				TextView counterView = (TextView) convertView.findViewById(R.id.navmenuitem_counter);
+				navMenuItemHolder.counterLabelView = counterView;
+			}
+			
 			convertView.setTag(navMenuItemHolder);
 		}
 
@@ -57,6 +65,10 @@ public class NavDrawerAdapter extends ArrayAdapter<NavDrawerItem> {
 			navMenuItemHolder = (NavMenuItemHolder) convertView.getTag();
 		}
 
+		if (menuItem.usesCounter()) {	
+			navMenuItemHolder.counterLabelView.setText("£" + menuItem.getCounter());
+		}
+		
 		navMenuItemHolder.labelView.setText(menuItem.getLabel());
 		navMenuItemHolder.iconView.setImageResource(menuItem.getIcon());
 
@@ -102,6 +114,7 @@ public class NavDrawerAdapter extends ArrayAdapter<NavDrawerItem> {
 	}
 
 	private static class NavMenuItemHolder {
+		public TextView counterLabelView;
 		private TextView labelView;
 		private ImageView iconView;
 	}

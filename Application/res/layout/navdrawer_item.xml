@@ -11,15 +11,23 @@
        android:id="@+id/navmenuitem_icon"
        android:layout_width="wrap_content"
        android:layout_height="40dp"
-        android:layout_centerVertical="true"
-        android:paddingLeft="15dp"/>
+        android:layout_centerVertical="true" />
 
     <TextView
         android:id="@+id/navmenuitem_label"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_toRightOf="@id/navmenuitem_icon"
         android:gravity="center_vertical"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp" />
+    
+    <TextView
+        android:id="@+id/navmenuitem_counter"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_toRightOf="@id/navmenuitem_label"
+        android:gravity="right|center_vertical"
         android:textColor="#FFFFFF"
         android:textSize="20sp" />
 
