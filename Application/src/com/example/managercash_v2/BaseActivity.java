@@ -21,9 +21,9 @@ import com.example.managercash_v2.drawer.NavDrawerAdapter;
 import com.example.managercash_v2.drawer.NavDrawerItem;
 import com.example.managercash_v2.drawer.NavMenuItem;
 import com.example.managercash_v2.drawer.NavMenuSection;
-import com.example.managercash_v2.fragments.Account;
-import com.example.managercash_v2.fragments.Categories;
-import com.example.managercash_v2.fragments.Settings;
+import com.example.managercash_v2.fragments.account.Account;
+import com.example.managercash_v2.fragments.categories.Categories;
+import com.example.managercash_v2.fragments.settings.Settings;
 
 public abstract class BaseActivity extends ActionBarActivity {
 

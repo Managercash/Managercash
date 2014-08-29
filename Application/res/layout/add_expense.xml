@@ -22,7 +22,6 @@
             android:horizontalSpacing="8dp"
             android:numColumns="4"
             android:verticalSpacing="8dp" >
-            <!-- android:stretchMode = "none" -->
             
         </GridView>
 

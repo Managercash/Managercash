@@ -1,15 +1,166 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
 
     <TextView
         android:id="@+id/andNewExpenseText1"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/recurring"
-        android:gravity = "center"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-  
+        android:layout_margin="8dp"
+        android:background="@drawable/grey_bg"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="@string/add_new_expense"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/white" />
+
+    <ScrollView
+        android:id="@+id/new_expense_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+
+        <RelativeLayout
+            android:id="@+id/new_expense_relative_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp" >
+
+            <RelativeLayout
+                android:id="@+id/new_expense_relative_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/grey_bg"
+                android:orientation="vertical"
+                android:padding="10dp" >
+
+                <ImageView
+                    android:id="@+id/addNewExpenseImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:background="@drawable/text_box_field"
+                    android:contentDescription="@string/addNewExpenseImageviewDescription"
+                    android:padding="4dp"
+                    android:src="@drawable/categories" />
+
+                <EditText
+                    android:id="@+id/editName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/addNewExpenseImage"
+                    android:hint="@string/name"
+                    android:maxLines="1"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" >
+
+                    <requestFocus />
+                </EditText>
+
+                <EditText
+                    android:id="@+id/editAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/editName"
+                    android:layout_below="@+id/editName"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="5dp"
+                    android:ems="10"
+                    android:hint="@string/amount"
+                    android:inputType="numberDecimal"
+                    android:maxLines="1"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/transactionRepeatPopup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/addNewExpenseImage"
+                    android:layout_below="@+id/dateView"
+                    android:text="@string/questionMark"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/white" />
+
+                <CheckBox
+                    android:id="@+id/repeatTransactionCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/dateView"
+                    android:layout_marginBottom="10dp"
+                    android:layout_toRightOf="@+id/transactionRepeatPopup"
+                    android:text="@string/repeatTransaction"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/accent_green" />
+
+                <CheckBox
+                    android:id="@+id/transactionTileCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/repeatTransactionCheckBox"
+                    android:layout_toRightOf="@+id/transactionTilePopup"
+                    android:text="@string/tileTransaction"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/transactionTilePopup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/transactionTileCheckBox"
+                    android:layout_toLeftOf="@+id/repeatTransactionCheckBox"
+                    android:text="@string/questionMark"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/dateView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/editAmount"
+                    android:layout_alignRight="@id/editAmount"
+                    android:layout_below="@+id/editAmount"
+                    android:layout_marginBottom="10dp"
+                    android:paddingLeft="8dp"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <LinearLayout
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/accept_button"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/accept"
+            android:textColor="@color/teal"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/cancel_button"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/cancel"
+            android:textColor="@color/teal"
+            android:textStyle="bold" />
+    </LinearLayout>
 
 </LinearLayout>

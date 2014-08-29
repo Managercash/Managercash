@@ -8,7 +8,7 @@
     <string name="add_income">This is the income page!</string>
     <string name="recurring">This is the recurring page!</string>
     <string name="targets">This is the targets page!</string>
-    <string name="add_new_expense">This is the add new expense page!</string>
+    <string name="add_new_expense">Add New Expense</string>
     <string name="overview_income">This is the income overview page</string>
     <string name="account">This is the accounts page!</string>
     <string name="wallets">This is the wallets page!</string>
@@ -33,6 +33,18 @@
     <string name = "removeIncome">Cancel + Income</string>
     <string name = "reallyRemoveIncome">Are you sure you wish to remove this Income?</string>
     <string name = "addIncomeImageviewDescription">Image of current spinner selection</string>
+    <string name = "addNewExpenseImageviewDescription">Image selected by user for add new expense</string>
+    <string name = "name">Name</string>
+    <string name = "amount">Amount</string>
+    <string name = "removeNewExpense"> Cancel New Expense</string>
+    <string name = "reallyRemoveNewExpense">Are you sure you wish to remove this Expense?</string>
+    <string name = "repeatTransaction">Log this transaction to repeat</string>
+    <string name = "tileTransaction">Make this transaction a tile</string>
+    <string name ="questionMark">\?</string>
+    <string name = "repeatSpinnerInfo">Repeat every: </string>
+    <string name = "position">Tile Position:</string>
+    <string name = "incrementAmount">Increment Amount</string>
+    <string name = "reminder">Set Reminder</string>
 
 
 </resources>

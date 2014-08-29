@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id = "@+id/repeat_layout_id"
+    android:layout_width="wrap_content"
+    android:layout_height="0dip"
+    android:layout_margin="8dp"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/grey_bg"
+    android:orientation="vertical"
+    android:padding="10dp" >
+
+    <TextView
+        android:id="@+id/repeatSpinnerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="4dp"
+        android:text="@string/repeatSpinnerInfo"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+    <Spinner
+        android:id="@+id/repeatSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/repeatSpinnerText" />
+
+    <Spinner
+        android:id="@+id/reminderSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/repeatSpinner"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/repeatSpinner"
+        android:prompt="@string/reminder" />
+
+</RelativeLayout>

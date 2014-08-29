@@ -5,11 +5,11 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.util.Log;
 
-import com.example.managercash_v2.fragments.AddExpense;
-import com.example.managercash_v2.fragments.AddIncome;
-import com.example.managercash_v2.fragments.Overview;
-import com.example.managercash_v2.fragments.Recurring;
-import com.example.managercash_v2.fragments.Targets;
+import com.example.managercash_v2.fragments.addExpense.AddExpenseContainer;
+import com.example.managercash_v2.fragments.addIncome.AddIncome;
+import com.example.managercash_v2.fragments.overview.OverviewContainer;
+import com.example.managercash_v2.fragments.recurring.Recurring;
+import com.example.managercash_v2.fragments.targets.Targets;
 
 /**
  * A {@link FragmentPagerAdapter} that returns a fragment corresponding to one
@@ -28,11 +28,11 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 		// below).
 		switch (position) {
 		case 0:
-			Overview overview = new Overview();
-			return overview;
+			OverviewContainer overviewContainer = new OverviewContainer();
+			return overviewContainer;
 		case 1:
-			AddExpense addExpense = new AddExpense();
-			return addExpense;
+			AddExpenseContainer addExpenseContainer = new AddExpenseContainer();
+			return addExpenseContainer;
 		case 2:
 			AddIncome addIncome = new AddIncome();
 			return addIncome;
@@ -44,7 +44,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 			return targets;
 		default:
 			Log.w("SectionsPagerAdapter - getItem", "Error creating fragment instances");
-			Overview overviewdefault = new Overview();
+			OverviewContainer overviewdefault = new OverviewContainer();
 			return overviewdefault;
 		}
 	}
