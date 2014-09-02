@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id = "@+id/repeat_layout_id"
+    android:id="@+id/repeat_layout_id"
     android:layout_width="wrap_content"
     android:layout_height="0dip"
     android:layout_margin="8dp"
@@ -25,15 +25,66 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
+        android:layout_marginBottom="8dp"
         android:layout_toRightOf="@+id/repeatSpinnerText" />
 
     <Spinner
         android:id="@+id/reminderSpinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/dateView"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/dateView"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/dateView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignLeft="@id/repeatSpinner"
         android:layout_alignParentRight="true"
         android:layout_below="@id/repeatSpinner"
-        android:prompt="@string/reminder" />
+        android:layout_marginBottom="8dp"
+        android:paddingLeft="8dp"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/note"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/dateView"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/reminderSpinner"
+        android:hint="@string/note"
+        android:inputType="textMultiLine"
+        android:isScrollContainer="true"
+        android:minHeight="100dp"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/dateView"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@id/dateView"
+        android:text="@string/endDate"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignBottom="@id/note"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="10dp"
+        android:src="@drawable/note" >
+    </ImageView>
 
 </RelativeLayout>

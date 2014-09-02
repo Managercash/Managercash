@@ -47,6 +47,7 @@ public class AddExpenseImageAdapter extends BaseAdapter {
         return position;
     }
     
+    
 
     // create a new ImageView for each item referenced by the Adapter
     @SuppressLint("NewApi") // If sdk less than 16 can't use grey_bg.xml

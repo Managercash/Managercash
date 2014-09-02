@@ -211,7 +211,6 @@ public class AddExpense extends Fragment implements OnClickListener {
 
 	    // Example: If you have a TextView inside `popup_layout.xml`    
 	    TextView tv = (TextView) popupView.findViewById(R.id.popUpText1);
-
 	    tv.setText("Confirm the following expenses");
 	    
 	    

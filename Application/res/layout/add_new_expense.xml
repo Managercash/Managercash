@@ -46,12 +46,13 @@
                     android:background="@drawable/text_box_field"
                     android:contentDescription="@string/addNewExpenseImageviewDescription"
                     android:padding="4dp"
-                    android:src="@drawable/categories" />
+                    />
 
                 <EditText
                     android:id="@+id/editName"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
                     android:layout_marginBottom="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@id/addNewExpenseImage"
@@ -60,14 +61,26 @@
                     android:textColor="@color/white"
                     android:textSize="20sp" >
 
-                    <requestFocus />
                 </EditText>
+                
+<!--                 <TextView
+                    android:id="@+id/poundSign"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/editAmount"
+                    android:layout_alignLeft="@+id/editAmount"
+                    android:text="@string/pound"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
+                    android:textSize="20sp" /> -->
 
                 <EditText
                     android:id="@+id/editAmount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/editName"
+                    android:layout_alignLeft="@id/editName"
+                    android:layout_alignParentRight="true"
                     android:layout_below="@+id/editName"
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="5dp"

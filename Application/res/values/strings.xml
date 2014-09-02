@@ -45,6 +45,8 @@
     <string name = "position">Tile Position:</string>
     <string name = "incrementAmount">Increment Amount</string>
     <string name = "reminder">Set Reminder</string>
+    <string name = "pound">\£</string>
+    <string name = "endDate">End date:</string>
 
 
 </resources>

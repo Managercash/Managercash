@@ -1,45 +1,61 @@
 package com.example.managercash_v2.database;
 
 public class Expense {
-	
-    //private variables
-    private int _id;
-    private int _wallet_id;
-    private int _category_id;
-    private String _name;
-    private String _date;
-    private long _amount;
-    
-    
-    // constructor
-    public Expense(int id, int _wallet_id, int _category_id, String _date, long _amount, String _name){
-        this._id = id;
-        this._wallet_id = _wallet_id;
-        this._category_id = _category_id;
-        this._date = _date;
-        this._amount = _amount;
-        this._name = _name;
-    }
-     
-    // constructor
-    public Expense(int _wallet_id, int _category_id, String _date, long _amount){
-        this._wallet_id = _wallet_id;
-        this._category_id = _category_id;
-        this._date = _date;
-        this._amount = _amount;
-    }
-    
-    public Expense(){
-    	
-    }
-    
-    public Expense(int _wallet_id, String _date, long _amount, String _name){
-        this._wallet_id = _wallet_id;
-        this._date = _date;
-        this._amount = _amount;
-        this._name = _name;
-    	
-    }
+
+	// private variables
+	private int _id;
+	private int _wallet_id;
+	private int _category_id;
+	private String _name;
+	private String _date;
+	private long _amount;
+	private String _image_id;
+
+	// constructor
+	public Expense(int id, int _wallet_id, int _category_id, String _date, long _amount, String _name) {
+		this._id = id;
+		this._wallet_id = _wallet_id;
+		this._category_id = _category_id;
+		this._date = _date;
+		this._amount = _amount;
+		this._name = _name;
+	}
+
+	// constructor
+	public Expense(int _wallet_id, int _category_id, String _date, long _amount) {
+		this._wallet_id = _wallet_id;
+		this._category_id = _category_id;
+		this._date = _date;
+		this._amount = _amount;
+	}
+
+	public Expense(int _wallet_id, String name, String _date, long _amount, String _image_id) {
+		this._wallet_id = _wallet_id;
+		this._name = name;
+		this._date = _date;
+		this._amount = _amount;
+		this._image_id = _image_id;
+	}
+
+	public Expense() {
+
+	}
+
+	public Expense(int _wallet_id, String _date, long _amount, String _name) {
+		this._wallet_id = _wallet_id;
+		this._date = _date;
+		this._amount = _amount;
+		this._name = _name;
+
+	}
+
+	public String get_image_id() {
+		return _image_id;
+	}
+
+	public void set_image_id(String _image_id) {
+		this._image_id = _image_id;
+	}
 
 	public int get_id() {
 		return _id;
@@ -88,6 +104,5 @@ public class Expense {
 	public void set_amount(long _amount) {
 		this._amount = _amount;
 	}
-	
 
 }

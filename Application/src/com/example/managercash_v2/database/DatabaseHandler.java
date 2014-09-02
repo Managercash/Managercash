@@ -30,6 +30,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 	// Expense table
 	private static final String TABLE_EXPENSE = "expense";
+	private static final String KEY_IMAGE_ID = "imageId";
 
 	// Income table
 	private static final String TABLE_INCOME = "income";
@@ -76,7 +77,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 	private static final String CREATE_TABLE_EXPENSE = "CREATE TABLE " + TABLE_EXPENSE + "(" + KEY_ID
 			+ " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " + KEY_WALLET_ID + " INTEGER, " + KEY_NAME + " TEXT, "
-			+ KEY_CATEGORY_ID + " INTEGER, " + KEY_DATE + " DATETIME, " + KEY_AMOUNT + " INTEGER " + ")";
+			+ KEY_CATEGORY_ID + " INTEGER, " + KEY_DATE + " DATETIME, " + KEY_AMOUNT + " INTEGER, " + KEY_IMAGE_ID + " TEXT" + ")";
 
 	private static final String CREATE_TABLE_INCOME = "CREATE TABLE " + TABLE_INCOME + "(" + KEY_ID
 			+ " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," + KEY_WALLET_ID + " INTEGER, " + KEY_CATEGORY_ID
@@ -413,10 +414,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		values.put(KEY_CATEGORY_ID, expense.get_category_id());
 		values.put(KEY_DATE, expense.get_date());
 		values.put(KEY_AMOUNT, expense.get_amount());
+		values.put(KEY_IMAGE_ID, expense.get_image_id());
 
 		db.insert(TABLE_EXPENSE, null, values);
+		if(expense.get_name() != null){
+		Log.w("Database", expense.get_name()
+					+ " expense has been added to Expenses");
+		}
+		else{
 		Log.w("Database", this.getCategoriesExpense(expense.get_category_id()).get_name()
 				+ " expense has been added to Expenses");
+		}
 
 		// Increment total expense value
 		Wallet w = this.getWallet(expense.get_wallet_id());
@@ -456,6 +464,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 			e.set_category_id(c.getInt(c.getColumnIndex(KEY_CATEGORY_ID)));
 			e.set_date(c.getString(c.getColumnIndex(KEY_DATE)));
 			e.set_wallet_id(c.getInt(c.getColumnIndex(KEY_WALLET_ID)));
+			e.set_image_id(c.getString(c.getColumnIndex(KEY_IMAGE_ID)));
 		} finally {
 			if (c != null) {
 				c.close();
@@ -491,6 +500,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 					e.set_category_id(c.getInt(c.getColumnIndex(KEY_CATEGORY_ID)));
 					e.set_date(c.getString(c.getColumnIndex(KEY_DATE)));
 					e.set_wallet_id(c.getInt(c.getColumnIndex(KEY_WALLET_ID)));
+					e.set_image_id(c.getString(c.getColumnIndex(KEY_IMAGE_ID)));
+
 
 					lE.add(e);
 				} while (c.moveToNext());
@@ -567,6 +578,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 					e.set_category_id(c.getInt(c.getColumnIndex(KEY_CATEGORY_ID)));
 					e.set_date(c.getString(c.getColumnIndex(KEY_DATE)));
 					e.set_wallet_id(c.getInt(c.getColumnIndex(KEY_WALLET_ID)));
+					e.set_image_id(c.getString(c.getColumnIndex(KEY_IMAGE_ID)));
+
 
 					lE.add(e);
 				} while (c.moveToNext());
@@ -605,6 +618,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 					e.set_category_id(c.getInt(c.getColumnIndex(KEY_CATEGORY_ID)));
 					e.set_date(c.getString(c.getColumnIndex(KEY_DATE)));
 					e.set_wallet_id(c.getInt(c.getColumnIndex(KEY_WALLET_ID)));
+					e.set_image_id(c.getString(c.getColumnIndex(KEY_IMAGE_ID)));
+
 
 					lE.add(e);
 				} while (c.moveToNext());

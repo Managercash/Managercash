@@ -195,8 +195,7 @@ public class Overview extends Fragment{
 
 		mSeries = new CategorySeries("");
 		mRenderer = new DefaultRenderer();
-		int[] colors = new int[] { Color.RED, Color.BLUE, Color.YELLOW, Color.GREEN, Color.CYAN, Color.BLACK,
-				Color.MAGENTA, Color.WHITE };
+		int[] colors = new int[] { Color.rgb(0, 204, 204), Color.rgb(255, 51, 51),  Color.rgb(255, 135,0),  Color.rgb(0, 204, 204), Color.rgb(0, 204, 0),Color.rgb(178, 102, 255)};
 		double[] values = new double[21];
 		String[] names = new String[21];
 
