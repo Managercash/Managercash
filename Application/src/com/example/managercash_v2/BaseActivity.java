@@ -1,5 +1,9 @@
 package com.example.managercash_v2;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -16,6 +20,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.example.managercash_v2.database.DatabaseHandler;
+import com.example.managercash_v2.database.Wallet;
 import com.example.managercash_v2.drawer.NavDrawerActivityConfiguration;
 import com.example.managercash_v2.drawer.NavDrawerAdapter;
 import com.example.managercash_v2.drawer.NavDrawerItem;
@@ -35,7 +41,14 @@ public abstract class BaseActivity extends ActionBarActivity {
 	private CharSequence mDrawerTitle;
 	private CharSequence mTitle;
 
-	private static NavDrawerActivityConfiguration navConf;
+	private static int walletId = 0;
+	private static Wallet wallet = null;
+	
+	private NavDrawerItem[] menuContent;
+	
+	private NavDrawerActivityConfiguration navConf;
+	
+	private static BaseActivity instance;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +56,13 @@ public abstract class BaseActivity extends ActionBarActivity {
 
 		super.onCreate(savedInstanceState);
 
+		instance = this;
+		
 		navConf = getNavDrawerConfiguration();
 
 		setContentView(navConf.getMainLayout());
+		
+		setWalletId(1);
 
 		mTitle = mDrawerTitle = getTitle();
 
@@ -69,6 +86,9 @@ public abstract class BaseActivity extends ActionBarActivity {
 			}
 
 			public void onDrawerOpened(View drawerView) {
+				
+				
+				
 				getActionBar().setTitle(mDrawerTitle);
 				invalidateOptionsMenu();
 			}
@@ -76,38 +96,64 @@ public abstract class BaseActivity extends ActionBarActivity {
 		mDrawerLayout.setDrawerListener(mDrawerToggle);
 	}
 
-	protected NavDrawerActivityConfiguration getNavDrawerConfiguration() {
-		Log.w("managercash", "NavDrawerActivityConfiguration is called");
-
-		NavDrawerItem[] menu = new NavDrawerItem[] { NavMenuSection.create(100, "Wallets"),
-				NavMenuItem.create(101, "Steve-Savings", 20, "wallet", false, this),
-				NavMenuItem.create(102, "Steve Junior", 12, "wallet", false, this),
+	private void refreshMenuContent()
+	{
+		//Dynamically finds wallets and displays in menu using databaseHandler 
+		List<Wallet> wallets = new DatabaseHandler(this).getAllWallets();
+		
+		List<NavDrawerItem> menu = new ArrayList<NavDrawerItem>(0);
+		
+		menu.add(NavMenuSection.create(100, "Wallets"));
+		
+		for(int i = 0; i < wallets.size(); i++)
+		{
+			Wallet wallet = wallets.get(i);
+			Log.d("Wallet IDs", Integer.toString(wallet.getId()));
+			menu.add(NavMenuItem.create(101 + i, wallet.getName(), (int)(wallet.getTotalIncome() - wallet.getTotalExpense()), "wallet", false, this));
+		}
+		
+		//Non-wallet members of the drawer
+		menu.addAll(Arrays.asList(
 				NavMenuSection.create(200, "General"),
 				NavMenuItem.create(201, "Account", "accounts", true, this),
 				NavMenuItem.create(202, "Categories", "categories", true, this),
-				NavMenuItem.create(203, "Settings", "settings", true, this) };
+				NavMenuItem.create(203, "Settings", "settings", true, this)));
+		
+		menuContent = menu.toArray(new NavDrawerItem[menu.size()]);
+	}
+	
+	protected NavDrawerActivityConfiguration getNavDrawerConfiguration() {
+		Log.w("managercash", "NavDrawerActivityConfiguration is called");
+		
+		//Dynamically finds wallets and displays in menu using databaseHandler 
+		refreshMenuContent();
 
 		NavDrawerActivityConfiguration navDrawerActivityConfiguration = new NavDrawerActivityConfiguration();
 		navDrawerActivityConfiguration.setMainLayout(R.layout.activity_main);
 		navDrawerActivityConfiguration.setDrawerLayoutId(R.id.drawer_layout);
 		navDrawerActivityConfiguration.setLeftDrawerId(R.id.drawer_list);
-		navDrawerActivityConfiguration.setNavItems(menu);
+		navDrawerActivityConfiguration.setNavItems(menuContent);
 		navDrawerActivityConfiguration.setDrawerShadow(R.drawable.drawer_shadow);
 		navDrawerActivityConfiguration.setDrawerOpenDesc(R.string.drawer_open);
 		navDrawerActivityConfiguration.setDrawerCloseDesc(R.string.drawer_closed);
-		navDrawerActivityConfiguration.setBaseAdapter(new NavDrawerAdapter(this, R.layout.navdrawer_item, menu));
+		navDrawerActivityConfiguration.setBaseAdapter(new NavDrawerAdapter(this, R.layout.navdrawer_item, menuContent));
 		return navDrawerActivityConfiguration;
 	}
 
 	// NavDrawer click listener
 	protected void onNavItemSelected(int id) {
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-		Fragment fragment  = null;		
+		Fragment fragment  = null;
+		
+		if(id < 200 && id > 100)
+		{
+			setWalletId(id - 100);
+			//Update menu TODO create listener to do this, especially when wallet is updated elsewhere
+			refreshContent(); //seems to have only have effect here
+			navConf.getBaseAdapter().notifyDataSetChanged();
+		}
+		
 		switch ((int) id) {
-		case 101:
-			break;
-		case 102:
-			break;
 		case 201:
             fragment = new Account();
             ft.replace(R.id.container, fragment);
@@ -198,6 +244,8 @@ public abstract class BaseActivity extends ActionBarActivity {
 			selectItem(position);
 		}
 	}
+	
+	
 
 	public void selectItem(int position) {
 		NavDrawerItem selectedItem = navConf.getNavItems()[position];
@@ -213,7 +261,36 @@ public abstract class BaseActivity extends ActionBarActivity {
 			mDrawerLayout.closeDrawer(mDrawerList);
 		}
 	}
-
+	
+	public static BaseActivity getInstance()
+	{
+		return instance;
+	}
+	
+	public static int getWalletId() {
+		return walletId;
+	}
+	
+	public static Wallet getWallet() {
+		return wallet;
+	}
+	
+	private void setWalletId(int walletId) {
+		BaseActivity.walletId = walletId;
+		wallet = new DatabaseHandler(this).getWallet(walletId);
+	}
+	
+	public void refreshContent()
+	{
+		Fragment frg1 = null, frg2 = null;
+		frg1 = getSupportFragmentManager().findFragmentById(R.id.overview_container);
+		frg2 = getSupportFragmentManager().findFragmentById(R.id.drawer_layout);
+		final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+		ft.detach(frg1);
+		ft.attach(frg1);
+		ft.commit();
+	}
+	
 	@Override
 	public void setTitle(CharSequence title) {
 		mTitle = title;
@@ -221,3 +298,4 @@ public abstract class BaseActivity extends ActionBarActivity {
 	}
 
 }
+

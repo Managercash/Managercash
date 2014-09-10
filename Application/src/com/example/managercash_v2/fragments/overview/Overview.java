@@ -25,11 +25,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.managercash_v2.BaseActivity;
 import com.example.managercash_v2.R;
 import com.example.managercash_v2.database.CategoriesExpense;
 import com.example.managercash_v2.database.DatabaseHandler;
@@ -74,7 +74,7 @@ public class Overview extends Fragment{
 		updateWallet();
 
 		TextView textView1 = (TextView) overview.findViewById(R.id.overviewText1);
-		textView1.setText("Overview \nTotal Income = Â£" + currentWallet.getTotalIncome() + "\nTotal Expense =  Â£"
+		textView1.setText("Overview \nTotal Income = £" + currentWallet.getTotalIncome() + "\nTotal Expense =  £"
 				+ currentWallet.getTotalExpense());
 		
 
@@ -323,8 +323,6 @@ public class Overview extends Fragment{
 	}
 
 	private void updateWallet() {
-		currentWallet = dh.getWallet(1); // Need to change this integer!
+		currentWallet = BaseActivity.getWallet();
 	}
-
-
 }

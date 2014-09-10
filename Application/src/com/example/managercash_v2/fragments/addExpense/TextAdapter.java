@@ -15,6 +15,7 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.TextView;
 
+import com.example.managercash_v2.BaseActivity;
 import com.example.managercash_v2.MainActivity;
 import com.example.managercash_v2.database.CategoriesExpense;
 import com.example.managercash_v2.database.DatabaseHandler;
@@ -56,23 +57,14 @@ public final class TextAdapter extends BaseAdapter {
 
 			// Loop through categoriesEpenseList, creating expenses. Then resets
 			// the lists temporary amount to 0.
+			int walletId = BaseActivity.getWalletId(); //gets wallet id from base activity
+			
 			for (int i = 0; i < 20; i++) {
 				if (categoriesExpenseList.get(i).get_temp_amount() > 0) {
-					Expense expense = new Expense(1, i + 1, date, categoriesExpenseList.get(i).get_temp_amount()); // Using
-																													// a
-																													// mainActivity
-																													// instance
-																													// to
-																													// get
-																													// wallet
-																													// id..
-																													// any
-																													// good?
-
+					Expense expense = new Expense(walletId, i + 1, date, categoriesExpenseList.get(i).get_temp_amount());
 					dh.createExpense(expense);
 				}
 			}
-
 		}
 
 	}

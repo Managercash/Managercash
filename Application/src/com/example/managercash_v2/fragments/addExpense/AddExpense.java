@@ -24,6 +24,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.managercash_v2.BaseActivity;
 import com.example.managercash_v2.R;
 
 public class AddExpense extends Fragment implements OnClickListener {
@@ -167,6 +168,7 @@ public class AddExpense extends Fragment implements OnClickListener {
 			tA.resetTemps();
 			tA.notifyDataSetChanged();
 			removePopup();
+			BaseActivity.getInstance().refreshContent();
 			Toast.makeText(context, "Expenses have been added", Toast.LENGTH_SHORT).show();
 			break;
 			
