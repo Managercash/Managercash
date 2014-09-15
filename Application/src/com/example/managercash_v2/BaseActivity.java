@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -282,13 +284,25 @@ public abstract class BaseActivity extends ActionBarActivity {
 	
 	public void refreshContent()
 	{
-		Fragment frg1 = null, frg2 = null;
-		frg1 = getSupportFragmentManager().findFragmentById(R.id.overview_container);
-		frg2 = getSupportFragmentManager().findFragmentById(R.id.drawer_layout);
-		final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-		ft.detach(frg1);
-		ft.attach(frg1);
-		ft.commit();
+		//smooth refresh, doesn't do the drawer though
+//		Fragment frg1 = null;
+//		frg1 = getSupportFragmentManager().findFragmentById(R.id.overview_container); //trying drawer_layout breaks app
+//		final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//		ft.detach(frg1);
+//		ft.attach(frg1);
+//		ft.commit();
+		
+		//refreshes - brief (half a second or so) of black screen time
+//		this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+//		this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		
+		//refreshes - shorter black screen time
+		this.recreate();
+		
+		//New activity on top
+//		Intent refresh = new Intent(this, MainActivity.class);
+//		startActivity(refresh);
+//		this.finish();
 	}
 	
 	@Override

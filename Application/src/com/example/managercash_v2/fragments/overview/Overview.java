@@ -39,7 +39,6 @@ import com.example.managercash_v2.database.Wallet;
 public class Overview extends Fragment{
 	private DatabaseHandler dh;
 	private Context context;
-	private Wallet currentWallet;
 	private View thisView;
 
 	// Line Graph Variables
@@ -71,11 +70,9 @@ public class Overview extends Fragment{
 		this.thisView = overview;
 		dh = new DatabaseHandler(context);
 
-		updateWallet();
-
 		TextView textView1 = (TextView) overview.findViewById(R.id.overviewText1);
-		textView1.setText("Overview \nTotal Income = £" + currentWallet.getTotalIncome() + "\nTotal Expense =  £"
-				+ currentWallet.getTotalExpense());
+		textView1.setText("Overview \nTotal Income = £" + dh.getWallet(BaseActivity.getWalletId()).getTotalIncome() + "\nTotal Expense =  £"
+				+ dh.getWallet(BaseActivity.getWalletId()).getTotalExpense());
 		
 
 
@@ -270,8 +267,6 @@ public class Overview extends Fragment{
 		Log.w("Overview", "Overview - onResume has been called");
 		super.onResume();
 
-		updateWallet();
-
 		if (lineChartView == null) {
 			Log.w("Overview", "Overview - LineChartView == null");
 			LinearLayout layout = (LinearLayout) thisView.findViewById(R.id.lineChart);
@@ -320,9 +315,5 @@ public class Overview extends Fragment{
 			pieChartView.repaint();
 		}
 
-	}
-
-	private void updateWallet() {
-		currentWallet = BaseActivity.getWallet();
 	}
 }
